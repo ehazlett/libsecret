@@ -17,6 +17,7 @@ var (
 )
 
 type Vault struct {
+	addr   string
 	client *api.Client
 }
 
@@ -44,8 +45,17 @@ func NewVault(addr string, config *store.Config) (store.SecretStore, error) {
 	}
 
 	return &Vault{
+		addr:   addr,
 		client: c,
 	}, nil
+}
+
+func (v *Vault) Address() string {
+	return v.addr
+}
+
+func (v *Vault) Backend() store.Backend {
+	return store.VAULT
 }
 
 func (v *Vault) Get(path string) (*store.Secret, error) {

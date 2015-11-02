@@ -17,6 +17,10 @@ var (
 )
 
 type SecretStore interface {
+	// Address returns the address for the store
+	Address() string
+	// Backend returns the backend used for the store
+	Backend() Backend
 	// Get returns a secret from the store
 	Get(path string) (*Secret, error)
 	// Put stores a secret in the store
